@@ -1,0 +1,164 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - good morning
+    - good evening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: About_covid19_questions
+  examples: |
+    - tell me covid19 [symptoms]{"entity": "questions"}
+    - covid19 [prevention]{"entity": "questions"}
+    - covid19 [symptoms]{"entity": "questions"}
+    - will covid19 [recur]{"entity": "questions"}?
+    - How to [prevent]{"entity": "questions"} covid19?
+    - [social distancing]{"entity": "questions"}]
+    - [prevention]{"entity": "questions"}
+    - [relapse]{"entity": "questions"}
+    - tell me about covid19 [information]{"entity": "questions"}
+    - [symptoms]{"entity": "questions"}
+    - [prevention]{"entity": "questions"}
+    - [prevent]{"entity": "questions"}
+
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+
+- intent: ask_covid19_date
+  examples: |
+    -show me infected covid19 people [today]{"entity": "date"}
+    -show me infected covid19 people [yesterday]{"entity": "date"}
+    -So please tell me the number of infected people [today]{"entity": "date"}
+    -The number of infected covid19 [today]{"entity": "date"}
+    -Show covid19 [today]{"entity": "date"}
+    -Show the number of infected covid19 people [today]{"entity": "date"}
+
+- intent: covid19_location
+  examples: |
+   - [Seoul]{"entity": "location"}
+   - [Busan]{"entity": "location"}
+   - [Gyeonggi-do]{"entity": "location"}
+   - [Incheon]{"entity": "location"}
+   - [Gangwon-do]{"entity": "location"}
+   - [Sejong]{"entity": "location"}
+   - [Chungcheongnam-do]{"entity": "location"}
+   - [Chungcheongbuk-do]{"entity": "location"}
+   - [Daejeon]{"entity": "location"}
+   - [Gyeongsangbuk-do]{"entity": "location"}
+   - [Gyeongsangnam-do]{"entity": "location"}
+   - [Daegu]{"entity": "location"}
+   - [Ulsan]{"entity": "location"}
+   - [Jeollabuk-do]{"entity": "location"}
+   - [Gwangju]{"entity": "location"}
+   - [Jeollanam-do]{"entity": "location"}
+   - [Jeju]{"entity": "location"}
+   - [Total]{"entity": "location"}
+
+
+- intent: covid19_state
+  examples: |
+   - [isolation]{"entity": "state"}
+   - [the death toll]{"entity": "state"}
+   - [confirmed]{"entity": "state"}
+   - [release]{"entity": "state"}
+   - [New]{"entity": "state"}
+
+- intent: covid19_month
+  examples: |
+   - [January]{"entity": "month"}
+   - [Febuary]{"entity": "month"}
+   - [march]{"entity": "month"}
+   - [April]{"entity": "month"}
+   - [May]{"entity": "month"}
+   - [June]{"entity": "month"}
+   - [July]{"entity": "month"}
+   - [August]{"entity": "month"}
+   - [September]{"entity": "month"}
+   - [October]{"entity": "month"}
+   - [November]{"entity": "month"}
+   - [December]{"entity": "month"}
+

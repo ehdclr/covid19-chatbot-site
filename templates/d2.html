@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코로나 지역현황</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/chart.min.js"></script>
+    <style>
+        div > h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>코로나 지역현황</h1>
+    {% for d in data %}"{{d.gubun}}",{% endfor %}
+    <hr>
+    사망자(누적)
+    {% for d in data %}{{d.deathCnt}},{% endfor %}
+    <hr>
+    전일대비 증감 수 (확진자)
+    {% for d in data %}
+        {{d.incDec}}
+    {% endfor %}
+    <hr>
+    격리 해제 수
+    {% for d in data %}
+        {{d.isolClearCnt}}
+    {% endfor %}
+    <hr>
+    10만명당 발생률
+    {% for d in data %}
+        {{d.qurRate}}
+    {% endfor %}
+
+    <hr>
+    <div>
+        <h1>지역별 사망자 누적수</h1>
+        <canvas id="death"></canvas>
+
+        <h1>전일대비 증감수</h1>
+        <canvas id="incDec"></canvas>
+    </div>
+    
+    <script>
+        //지역 표현 색깔
+        colorList = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(215, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(205, 206, 86, 0.2)', 'rgba(45, 192, 192, 0.2)', 'rgba(13, 102, 255, 0.2)', 'rgba(225, 159, 64, 0.2)', 'rgba(235, 99, 132, 0.2)', 'rgba(154, 162, 235, 0.2)', 'rgba(250, 206, 86, 0.2)', 'rgba(0, 192, 192, 0.2)', 'rgba(0, 102, 255, 0.2)', 'rgba(0, 159, 64, 0.2)', 'rgba(0, 159, 64, 0.2)']
+        // 사망자수 그래프
+        var ctx_deathCnt = document.getElementById('deathCnt').getContext('2d');
+
+        var deathCntChart = new Chart(ctx_deathCnt, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for d in data %}"{{d.gubun}}",{% endfor %}],
+                datasets: [{
+                    label: '사망자 누적',
+                    data: [{% for d in data %}{{d.deathCnt}},{% endfor %}],
+                    backgroundColor: colorList
+                }]
+            }
+        });
+
+        // 전일대비 증감수 그래프
+        var ctx_incDec = document.getElementById('incDec').getContext('2d');
+
+        var incDecChart = new Chart(ctx_incDec, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for d in data %}"{{d.gubun}}",{% endfor %}],
+                datasets: [{
+                    label: '전일대비 증감수',
+                    data: [{% for d in data %}{{d.incDec}},{% endfor %}],
+                    backgroundColor: colorList
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

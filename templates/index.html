@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>코로나 지역현황</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+    <style>
+      #chartbox{
+        width : 30%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      div > h1 {
+        text-align: center;
+      }
+      
+    </style>
+</head>
+ <body>
+     <h1> 코로나 지역 현황</h1>
+    {% for d in data %} "{{d.gubun}}",{% endfor %}
+    <hr>
+    사망자 수
+    {% for d in data %} "{{d.deathCnt}}", {% endfor %}
+    <hr>
+    전일대비 징감 수
+  {% for d in data %}
+        {{d.incDec}},
+    {% endfor %}
+    <hr>
+    격리 해제 수
+    {% for d in data %}
+        {{d.isolClearCnt}},
+    {% endfor %}
+    <hr>
+    10만명당 발생률
+{% for d in data %}
+        {{d.qurRate}},
+    {% endfor %}
+    <hr> 
+    <div id= "chartbox">
+  
+  
+      <h1> 지역별 사망자 누적수</h1>
+      <canvas id="deathCnt"></canvas>
+
+      <h1> 전일대비 증감 수  확진자</h1>
+      <canvas id="incDec"></canvas>
+      
+      <h1> 격리 해제 수</h1>
+      <canvas id="isolClearCnt"></canvas>
+      
+      <h1> 10만명당 발생률</h1>
+      <canvas id="qurRate"></canvas>
+</div>
+
+
+<script>
+  //지역 표현 색깔
+  colorList = ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)",
+  "rgb(200, 99, 132)", "rgb(200, 162, 235)", "rgb(200, 205, 86)",
+  "rgb(160, 99, 132)", "rgb(160, 162, 235)", "rgb(160, 205, 86)",
+  "rgb(130, 99, 132)", "rgb(130, 162, 235)", "rgb(130, 205, 86)",
+    "rgb(60, 99, 132)", "rgb(60, 162, 235)", "rgb(60, 205, 86)",
+  "rgb(0, 99, 132)", "rgb(0, 162, 235)", "rgb(0, 205, 86)",]
+
+   //사망자 수 그래프
+   var ctx_deathCnt = document.getElementById('deathCnt').getContext('2d');
+
+var deathCntChart = new Chart(ctx_deathCnt, {
+    type:"doughnut",
+    data: {
+      labels: [{% for d in data %} "{{d.gubun}}",{% endfor %}],
+
+          datasets: [{
+            label: "사망자 누적",
+            data: [{% for d in data %} {{d.deathCnt}}, {% endfor %}],
+            backgroundColor: colorList
+          }],
+            //hoverOffset: 4
+          }
+        });
+        
+        
+
+     //전일 대비 확진자 수 그래프
+   var ctx_incDec = document.getElementById('incDec').getContext('2d');
+
+var incDecChart= new Chart(ctx_incDec, {
+    type: "doughnut",
+    data: {
+      labels: [{% for d in data %} "{{d.gubun}}",{% endfor %}],
+
+          datasets: [{
+            label: "전일대비 증감 수 - 확진자",
+            data: [{% for d in data %} {{d.incDec}}, {% endfor %}],
+            backgroundColor: colorList
+          }],
+            //hoverOffset: 4
+          }
+        });
+
+
+             //격리 해제 수 그래프
+    var ctx_isolClearCnt = document.getElementById('isolClearCnt').getContext('2d');
+
+  var isolClearCntChart= new Chart(ctx_isolClearCnt, {
+      type: "doughnut",
+      data: {
+        labels: [{% for d in data %} "{{d.gubun}}",{% endfor %}],
+
+          datasets: [{
+            label: "격리 해제 수",
+            data: [{% for d in data %} {{d.isolClearCnt}}, {% endfor %}],
+            backgroundColor: colorList
+          }],
+            //hoverOffset: 4
+          }
+        });
+
+         //10만명당 발생률
+    var ctx_qurRate = document.getElementById('qurRate').getContext('2d');
+
+  var qurRateChart= new Chart(ctx_qurRate, {
+      type: "doughnut",
+      data: {
+        labels: [{% for d in data %} "{{d.gubun}}",{% endfor %}],
+
+          datasets: [{
+            label: "10만명당 발생률",
+            data: [{% for d in data %} {{d.qurRate|float}}, {% endfor %}],
+            backgroundColor: colorList
+          }]
+            //hoverOffset: 4
+          }
+        }); 
+
+
+</script>
+<script>
+!(function () {
+  let e = document.createElement("script"),
+    t = document.head || document.getElementsByTagName("head")[0];
+  (e.src =
+    "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
+    // Replace 1.x.x with the version that you want
+    (e.async = !0),
+    (e.onload = () => {
+      window.WebChat.default(
+        {
+          initPayload: '/greet',
+          customData: { language: "en" },
+          socketUrl: "http://localhost:5005",
+          title: 'Covid19 Bot',
+          subtitle: 'information about covid19',
+          // add other props here
+        },
+        null
+      );
+    }),
+    t.insertBefore(e, t.firstChild);
+})();
+</script>
+<style>
+    .rw-conversation-container .rw-header{background-color: #fa7070}
+    .rw-conversation-container .rw-messages-container .rw-message .rw-response{background-color: #fa7070}
+</style>
+
+
+</body>
+</html>
